@@ -30,7 +30,7 @@ const server = app.listen(process.env.PORT, '0.0.0.0', () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
     credentials: true,
   },
 });
@@ -41,6 +41,8 @@ io.on("connection", (socket) => {
   socket.on("add-user", (userId) => {
     onlineUsers.set(userId, socket.id);
   });
+
+  socket.emit("me", socket.id)
 
   socket.on("send-msg", (data) => {
     const sendUserSocket = onlineUsers.get(data.to);

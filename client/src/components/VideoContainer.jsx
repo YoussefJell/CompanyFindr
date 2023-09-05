@@ -5,7 +5,7 @@ import { BiCollapseAlt } from "react-icons/bi";
 export default function DraggableModal({ closeModal }) {
   const [isDragging, setIsDragging] = useState(false);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible] = useState(true);
   const localVideoRef = useRef();
   const remoteVideoRef = useRef();
   const peerConnection = useRef(new RTCPeerConnection());
