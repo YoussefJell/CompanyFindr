@@ -15,7 +15,6 @@ export default function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
-
   const [searchInput, setSearchInput] = useState('');
 
   useEffect(async () => {
@@ -91,7 +90,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 1rem;
   align-items: center;
   background-color: #FFF5E0;
   .container {
@@ -111,7 +109,7 @@ const Container = styled.div`
     padding: 2rem 2rem;
     padding-bottom: 9rem;
   }
-  input {
+  .searchInput {
     position: absolute;
     background-color: #FFF5E0;
     padding: 1rem;

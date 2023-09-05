@@ -5,11 +5,15 @@ import Logout from "./Logout";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
+import { BiCameraMovie } from "react-icons/bi";
+import DraggableModal from "../components/VideoContainer";
+import { BsDisplay } from "react-icons/bs";
 
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(async () => {
     const data = await JSON.parse(
@@ -69,6 +73,14 @@ export default function ChatContainer({ currentChat, socket }) {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Container>
       <div className="chat-header">
@@ -83,16 +95,22 @@ export default function ChatContainer({ currentChat, socket }) {
             <h3>{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
+        <div style={{ display: "flex" }}>
+          <Button onClick={openModal}>
+            <BiCameraMovie />
+          </Button>
+          <Logout />
+        </div>
+
       </div>
       <div className="chat-messages">
+        {isModalOpen && <DraggableModal closeModal={closeModal} />}
         {messages.map((message) => {
           return (
             <div ref={scrollRef} key={uuidv4()}>
               <div
-                className={`message ${
-                  message.fromSelf ? "sended" : "recieved"
-                }`}
+                className={`message ${message.fromSelf ? "sended" : "recieved"
+                  }`}
               >
                 <div className="content ">
                   <p>{message.message}</p>
@@ -179,5 +197,21 @@ const Container = styled.div`
         background-color: #F2E9D5;
       }
     }
+  }
+`;
+
+const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  margin-right: 5px;
+  border-radius: 0.5rem;
+  background-color: #141E46;
+  border: none;
+  cursor: pointer;
+  svg {
+    font-size: 1.3rem;
+    color: #FFF5E0;
   }
 `;

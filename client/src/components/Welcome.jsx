@@ -3,11 +3,14 @@ import styled from "styled-components";
 export default function Welcome() {
   const [userName, setUserName] = useState("");
   useEffect(async () => {
-    setUserName(
-      await JSON.parse(
-        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-      ).username
+    const data = await JSON.parse(
+      localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
     );
+    if (data) {
+      setUserName(
+        data.username
+      );
+    }
   }, []);
   return (
     <Container>
