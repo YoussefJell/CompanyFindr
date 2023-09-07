@@ -16,12 +16,13 @@ MangoDB
 
 ## Prerequisites
 ```
-# Update package lists
+# Update package lists.
 sudo apt update
 
-# Install Node.js and npm
+# Install Node.js and npm.
 sudo apt install nodejs npm
 
+# Access each server and client folder, and use the below command to install the dependencies of the project.
 npm i
 ```
 ## Deployment
